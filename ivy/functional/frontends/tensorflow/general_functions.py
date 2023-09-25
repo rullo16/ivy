@@ -264,6 +264,9 @@ def gather(params, indices, validate_indices=None, axis=None, batch_dims=0, name
 def gather_nd(params, indices, batch_dims=0, name=None):
     return ivy.gather_nd(params, indices, batch_dims=batch_dims)
 
+@to_ivy_arrays_and_back
+def hessians(ys, xs, gate_gradients=False,aggregation_method=None,name="hessians"):
+    return ivy.hessians(xs,ys,name,gate_gradients,aggregation_method)
 
 @to_ivy_arrays_and_back
 def identity(input, name=None):

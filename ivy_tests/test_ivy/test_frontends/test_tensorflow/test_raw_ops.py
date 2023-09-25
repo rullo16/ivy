@@ -2086,6 +2086,32 @@ def test_tensorflow_GreaterEqual(  # NOQA
         y=x[1],
     )
 
+# hessians
+@handle_frontend_test(
+    fn_tree="tensorflow.raw_ops.Hessians",
+    dtype_and_x=helpers.dtype_and_values(
+        available_dtypes=helpers.get_dtypes("numeric"),
+    ),
+    test_with_out=st.just(False),
+)
+def test_tensorflow_Hessians(
+        dtype_and_x,
+        frontend,
+        test_flags,
+        fn_tree,
+        backend_fw,
+        on_device,
+):
+    dtype, x = dtype_and_x
+    helpers.test_frontend_function(
+        input_dtypes=dtype,
+        backend_to_test=backend_fw,
+        frontend=frontend,
+        test_flags=test_flags,
+        fn_tree=fn_tree,
+        on_device=on_device,
+        input=x,
+    )
 
 # Identity
 @handle_frontend_test(

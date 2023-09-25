@@ -1037,6 +1037,32 @@ def test_tensorflow_gather_nd(
         batch_dims=batch_dims,
     )
 
+# hessians
+@handle_frontend_test(
+    fn_tree="tensorflow.hessians",
+    dtype_and_x = helpers.dtype_and_values(
+        available_dtypes=helpers.get_dtypes("numeric"),
+    ),
+    test_with_out=st.just(False),
+)
+def test_tensorflow_hessians(
+        dtype_and_x,
+        frontend,
+        backend_fw,
+        test_flags,
+        fn_tree,
+        on_device,
+):
+    dtype, x = dtype_and_x
+    helpers.test_frontend_function(
+        input_dtypes=dtype,
+        frontend=frontend,
+        backend_fw=backend_fw,
+        test_flags=test_flags,
+        fn_tree=fn_tree,
+        on_device=on_device,
+        input = x,
+    )
 
 # identity
 @handle_frontend_test(
